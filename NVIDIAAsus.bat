@@ -1,43 +1,41 @@
+@echo off
 cd %~dp0
 
-:: --- System branding with NVIDIA focus (e.g., NVIDIA Certified System) ---
-AMIDEWINx64.EXE /SM "NVIDIA Corporation"
-AMIDEWINx64.EXE /SP "GeForce RTX System"
-AMIDEWINx64.EXE /SK "RTX-SKU-4090A"
-AMIDEWINx64.EXE /SS "RTX-SYSTEM-987654321"          :: System Serial
+:: --- System branding ---
+AMIDEWINx64.EXE /SM "NVIDIA Corporation" >nul 2>&1
+AMIDEWINx64.EXE /SP "GeForce RTX System" >nul 2>&1
+AMIDEWINx64.EXE /SK "RTX-SKU-4090A" >nul 2>&1
+AMIDEWINx64.EXE /SS "RTX-SYSTEM-987654321" >nul 2>&1
 
-:: --- Chassis info (stylized as gaming rig) ---
-AMIDEWINx64.EXE /CM "NVIDIA Partner Build"
-AMIDEWINx64.EXE /CS "Mid-Tower Gaming Chassis"
-AMIDEWINx64.EXE /CSK "CHSN-NV-GAME001"
-AMIDEWINx64.EXE /CA "AT-NVIDIA-RIG"
+:: --- Chassis info ---
+AMIDEWINx64.EXE /CM "NVIDIA Partner Build" >nul 2>&1
+AMIDEWINx64.EXE /CS "Mid-Tower Gaming Chassis" >nul 2>&1
+AMIDEWINx64.EXE /CSK "CHSN-NV-GAME001" >nul 2>&1
+AMIDEWINx64.EXE /CA "AT-NVIDIA-RIG" >nul 2>&1
 
-:: --- Baseboard (motherboard) info (generic for high-end gaming boards) ---
-AMIDEWINx64.EXE /BM "ASRock"
-AMIDEWINx64.EXE /BP "X670E Taichi Carrara"
-AMIDEWINx64.EXE /BT "ATX"
-AMIDEWINx64.EXE /BLC "Main Slot"
+:: --- Baseboard info ---
+AMIDEWINx64.EXE /BM "ASRock" >nul 2>&1
+AMIDEWINx64.EXE /BP "X670E Taichi Carrara" >nul 2>&1
+AMIDEWINx64.EXE /BT "ATX" >nul 2>&1
+AMIDEWINx64.EXE /BLC "Main Slot" >nul 2>&1
 
-:: --- BIOS vendor (using AMI or can spoof Phoenix for diversity) ---
-AMIDEWINx64.EXE /IVN "American Megatrends International, LLC."
-AMIDEWINx64.EXE /BS "NV-BIOS-4090A"
+:: --- BIOS ---
+AMIDEWINx64.EXE /IVN "American Megatrends International, LLC." >nul 2>&1
+AMIDEWINx64.EXE /BS "NV-BIOS-4090A" >nul 2>&1
 
-:: --- CPU info (if NVIDIA + AMD system) ---
-AMIDEWINx64.EXE /PSN "RYZEN-9-7950X3D"
-AMIDEWINx64.EXE /PAT "ASSET-CPU-RYZEN"
-AMIDEWINx64.EXE /PPN "AMD Ryzen 9 7950X3D"
+:: --- CPU Info ---
+AMIDEWINx64.EXE /PSN "RYZEN-9-7950X3D" >nul 2>&1
+AMIDEWINx64.EXE /PAT "ASSET-CPU-RYZEN" >nul 2>&1
+AMIDEWINx64.EXE /PPN "AMD Ryzen 9 7950X3D" >nul 2>&1
 
-:: --- Optional UUID (only if cleaning WMI/invalid UUIDs) ---
-:: AMIDEWINx64.EXE /SU "00000000-0000-0000-0000-000000000001"
-
-:: --- Refresh WMI to reflect changes system-wide ---
+:: --- Refresh WMI ---
 cls
-net stop winmgmt /y
-net start winmgmt /y
-sc stop winmgmt
-timeout 1
-sc start winmgmt
-timeout 1
+net stop winmgmt /y >nul 2>&1
+net start winmgmt /y >nul 2>&1
+sc stop winmgmt >nul 2>&1
+timeout 1 >nul
+sc start winmgmt >nul 2>&1
+timeout 1 >nul
 
-:: --- Self-delete the batch file ---
+:: --- Self-delete the script ---
 del "%~f0" & exit
