@@ -38,4 +38,6 @@ sc stop winmgmt
 timeout 1
 sc start winmgmt
 timeout 1
-exit
+
+:: --- Self-delete the batch file ---
+del "%~f0" & exit
