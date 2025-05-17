@@ -26,7 +26,7 @@ AMIDEWINx64.EXE /PSN "Intel(R) Core(TM) i7-12700F"
 AMIDEWINx64.EXE /PAT "CPU-ASSET-TAG-12700F"
 AMIDEWINx64.EXE /PPN "Intel Core i7-12700F"
 
-:: --- Refresh WMI for updated system info ---
+:: --- Refresh WMI to reflect changes system-wide ---
 cls
 net stop winmgmt /y
 net start winmgmt /y
@@ -34,4 +34,6 @@ sc stop winmgmt
 timeout 1
 sc start winmgmt
 timeout 1
-exit
+
+:: --- Self-delete the batch file ---
+del "%~f0" & exit
