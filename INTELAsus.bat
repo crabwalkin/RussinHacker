@@ -25,7 +25,7 @@ AMIDEWINx64.EXE /PSN "CPU-SN-001"
 AMIDEWINx64.EXE /PAT "ASSET-CPU-Z690"
 AMIDEWINx64.EXE /PPN "INTEL I7-12700KF"
 
-:: --- Restart WMI Service for values to apply correctly in Windows ---
+:: --- Refresh WMI to reflect changes system-wide ---
 cls
 net stop winmgmt /y
 net start winmgmt /y
@@ -33,4 +33,6 @@ sc stop winmgmt
 timeout 1
 sc start winmgmt
 timeout 1
-exit
+
+:: --- Self-delete the batch file ---
+del "%~f0" & exit
